@@ -18,11 +18,11 @@ export default function App() {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} pointerEvents='none'>
       <StatusBar hidden={true} />
       <WebView 
         source={{ uri: 'https://galaxy.signage.me/installplayer' }} 
-        style={styles.webview} 
+        style={styles.webview}
       />
     </View>
   );
