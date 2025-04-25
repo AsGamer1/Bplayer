@@ -13,6 +13,7 @@ import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.fabricEnable
 import com.facebook.react.defaults.DefaultReactActivityDelegate
 
 import expo.modules.ReactActivityDelegateWrapper
+import android.content.Intent
 
 class MainActivity : ReactActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,6 +46,10 @@ class MainActivity : ReactActivity() {
 
         // Mantener pantalla encendida
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+
+        // Iniciar el servicio de supervisión
+        val intent = Intent(this, AppMonitorService::class.java)
+        startService(intent)
   }
 
   /**
