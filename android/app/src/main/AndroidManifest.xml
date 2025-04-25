@@ -1,10 +1,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
   <uses-permission android:name="android.permission.INTERNET"/>
-  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
   <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
   <uses-permission android:name="android.permission.VIBRATE"/>
-  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
   <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SYSTEM_EXEMPTED" />
+  <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+  <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+
   <queries>
     <intent>
       <action android:name="android.intent.action.VIEW"/>
@@ -29,7 +32,7 @@
         <data android:scheme="com.bseenmedia.bplayer"/>
       </intent-filter>
     </activity>
-    <service android:name=".AppMonitorService" android:enabled="true" android:exported="false" />
+    <service android:name=".AppMonitorService" android:enabled="true" android:foregroundServiceType="systemExempted" android:exported="false" />
     <receiver android:name=".BootReceiver" android:enabled="true" android:exported="true">
       <intent-filter>
         <action android:name="android.intent.action.BOOT_COMPLETED" />

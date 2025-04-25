@@ -17,6 +17,8 @@ import android.content.Intent
 
 import android.app.admin.DevicePolicyManager
 import android.content.ComponentName
+import android.content.Context
+import android.widget.Toast
 
 class MainActivity : ReactActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {

@@ -23,6 +23,8 @@ export default function App() {
       <WebView 
         source={{ uri: 'https://galaxy.signage.me/installplayer' }} 
         style={styles.webview}
+        javaScriptEnabled={true}
+        domStorageEnabled={true}
       />
     </View>
   );
