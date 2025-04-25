@@ -15,6 +15,9 @@ import com.facebook.react.defaults.DefaultReactActivityDelegate
 import expo.modules.ReactActivityDelegateWrapper
 import android.content.Intent
 
+import android.app.admin.DevicePolicyManager
+import android.content.ComponentName
+
 class MainActivity : ReactActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     // Set the theme to AppTheme BEFORE onCreate to support
@@ -25,7 +28,17 @@ class MainActivity : ReactActivity() {
     SplashScreenManager.registerOnActivity(this)
     // @generated end expo-splashscreen
     super.onCreate(null)
+
+        val dpm = getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
+        val compName = ComponentName(this, KioskDeviceAdminReceiver::class.java)
     
+        if (dpm.isDeviceOwnerApp(packageName)) {
+            dpm.setLockTaskPackages(compName, arrayOf(packageName))
+            startLockTask()
+        } else {
+            Toast.makeText(this, "La app no es device owner. Ejecuta el comando ADB.", Toast.LENGTH_LONG).show()
+        }
+        
         // Ocultar barra de estado y de navegación
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.insetsController?.let { controller ->
