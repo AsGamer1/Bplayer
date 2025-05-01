@@ -18,13 +18,14 @@ export default function App() {
   }, []);
 
   return (
-    <View style={styles.container} pointerEvents='none'>
+    <View style={styles.container}>
       <StatusBar hidden={true} />
       <WebView 
-        source={{ uri: 'https://galaxy.signage.me/installplayer' }} 
+        source={{ uri: 'https://player.admefy.com/' }} 
         style={styles.webview}
         javaScriptEnabled={true}
         domStorageEnabled={true}
+        geolocationEnabled={true}
       />
     </View>
   );

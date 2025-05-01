@@ -40,6 +40,20 @@ class MainActivity : ReactActivity() {
         } else {
             Toast.makeText(this, "La app no es device owner. Ejecuta el comando ADB.", Toast.LENGTH_LONG).show()
         }
+
+        dpm.setPermissionGrantState(
+            compName,
+            packageName,
+            Manifest.permission.CAMERA,
+            DevicePolicyManager.PERMISSION_GRANT_STATE_GRANTED
+        )
+
+        dpm.setPermissionGrantState(
+            compName,
+            packageName,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            DevicePolicyManager.PERMISSION_GRANT_STATE_GRANTED
+        )
         
         // Ocultar barra de estado y de navegación
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
