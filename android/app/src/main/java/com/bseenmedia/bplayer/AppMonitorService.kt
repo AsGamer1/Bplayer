@@ -50,10 +50,13 @@ class AppMonitorService : Service() {
     }
 
     private fun restartApp() {
-        Log.d("AppMonitor", "Reiniciando app desde el servicio")
-        val intent = Intent(this, MainActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivity(intent)
+        val prefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
+        if (!prefs.getBoolean("exitApp", false)) {
+            Log.d("AppMonitor", "Reiniciando app desde el servicio")
+            val intent = Intent(this, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }
     }
 
     override fun onDestroy() {

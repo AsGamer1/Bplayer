@@ -25,11 +25,35 @@ export default function App() {
     <View style={styles.container}>
       <StatusBar hidden={true} />
       <WebView 
-        source={{ uri: 'https://player.admefy.com/' }} 
+        source={{ uri: 'https://players.b-seen-media.eu/' }} 
         style={styles.webview}
         javaScriptEnabled={true}
         domStorageEnabled={true}
         geolocationEnabled={true}
+        injectedJavaScript={`
+          document.addEventListener('gesturestart', function (e) {
+            e.preventDefault();
+          });
+      
+          document.addEventListener('touchstart', function (e) {
+            if (e.touches.length > 1) {
+              e.preventDefault();
+            }
+          }, { passive: false });
+      
+          document.addEventListener('wheel', function(e) {
+            if (e.ctrlKey) {
+              e.preventDefault();
+            }
+          }, { passive: false });
+      
+          document.addEventListener('keydown', function(e) {
+            if ((e.ctrlKey || e.metaKey) && (e.key === '+' || e.key === '-' || e.key === '=')) {
+              e.preventDefault();
+            }
+          });
+          true;
+        `}
         onError={() => restartApp()}
         onHttpError={() => restartApp()}
       />

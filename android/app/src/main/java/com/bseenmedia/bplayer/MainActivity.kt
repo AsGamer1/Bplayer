@@ -29,6 +29,9 @@ class MainActivity : ReactActivity() {
   private val holdDuration = 10000L
   private val handler = Handler(Looper.getMainLooper())
   private val shutdownRunnable = Runnable {
+    val prefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
+    prefs.edit().putBoolean("exitApp", true).apply()
+    stopService(Intent(this, AppMonitorService::class.java))
     stopLockTask()
     finishAffinity()
     android.os.Process.killProcess(android.os.Process.myPid())
@@ -39,6 +42,9 @@ class MainActivity : ReactActivity() {
     SplashScreenManager.registerOnActivity(this)
     // @generated end expo-splashscreen
     super.onCreate(null)
+
+    val prefs = getSharedPreferences("settings", Context.MODE_PRIVATE)
+    prefs.edit().putBoolean("exitApp", false).apply()
 
     val dpm = getSystemService(Context.DEVICE_POLICY_SERVICE) as DevicePolicyManager
     val compName = ComponentName(this, KioskDeviceAdminReceiver::class.java)
