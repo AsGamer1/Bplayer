@@ -17,6 +17,10 @@ export default function App() {
     }
   }, []);
 
+  const restartApp = () => {
+    BackHandler.exitApp();
+  }
+
   return (
     <View style={styles.container}>
       <StatusBar hidden={true} />
@@ -26,6 +30,8 @@ export default function App() {
         javaScriptEnabled={true}
         domStorageEnabled={true}
         geolocationEnabled={true}
+        onError={() => restartApp()}
+        onHttpError={() => restartApp()}
       />
     </View>
   );
