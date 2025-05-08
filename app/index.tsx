@@ -25,7 +25,7 @@ export default function App() {
     <View style={styles.container}>
       <StatusBar hidden={true} />
       <WebView 
-        source={{ uri: 'https://players.b-seen-media.eu/' }} 
+        source={{ uri: 'https://players.b-seen-media.eu/content' }} 
         style={styles.webview}
         javaScriptEnabled={true}
         domStorageEnabled={true}
